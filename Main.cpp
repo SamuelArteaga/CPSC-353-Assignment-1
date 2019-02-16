@@ -9,7 +9,7 @@ int main()
 {
 	// gets user input 
 	string userInput;
-	string command; 
+	string action, object; 
 	cout << "login: ";
 	cin >> userInput;
 
@@ -38,13 +38,15 @@ int main()
 	if (userRoleMap.count(userInput) > 0) {
 		cout << "Welcome " << userInput << "!" << endl; 
 		cout << "cmd>";
-		cin >> command;
+		cin >> action >> object; 
+		
 	}
 	else {
 		cout << "ERROR: user " << userInput << " is not in the database!" << endl; 
 	}
+	 
 
-
+	
 
 	system("pause");
 	return 0;
