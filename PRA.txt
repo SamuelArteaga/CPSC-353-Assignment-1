@@ -1,0 +1,3 @@
+Professor modify Gradebook
+Professor view CourseSyllabus
+Lecturer view CourseSyllabus
