@@ -11,30 +11,46 @@ int main()
 	string userInput;
 	string action, object; 
 	cout << "login: ";
-	cin >> userInput;
+	cin >> userInput; 
 
-	// create the maps for the URA and PRA file input
-	multimap<string, string> userRoleMap; 
-	multimap<string, string, string> permissionRoleMap; 
-
-	fstream infile;
-	string info; 
-	infile.open("URA.txt");
 	vector<string> myVector;
+	multimap<string, string> userRoleMap;
+	multimap<string, string, string> permissionRoleMap;
+	fstream infile;
+	string info;
 
-	while (infile >> info){
-		int nElem = 0; 
-		auto it = myVector.insert(myVector.end(), info);  
-		nElem++; 
+	for (int i = 0; i < 2; i++) {
+		string filename; 
+		if (i == 0) {
+			filename = "URA.txt";
+		}
+		else if (i == 1) {
+			filename = "PRA.txt"; 
+		}
+		
+		infile.open(filename);
+		while (infile >> info) {
+			int nElem = 0;
+			auto it = myVector.insert(myVector.end(), info);
+			nElem++;
+		}
+		infile.close();
 	}
-	infile.close(); 
-	
+
 	for (int i = 0; i < myVector.size(); i += 2) {
-		string data1 = myVector.at(i);
-		string data2 = myVector.at(i + 1);
-		userRoleMap.insert(pair<string, string>(data1, data2));
+		string key = myVector.at(i);
+		string data = myVector.at(i + 1);
+		userRoleMap.insert(pair<string, string>(key, data));
 	}
 
+	for (int i = 0; i < myVector.size(); i += 2) {
+		string key = myVector.at(i);
+		string data1 = myVector.at(i + 1);
+		string data2 = myVector.at(i + 2); 
+		//string concat = data1 + " " + data2; 
+		permissionRoleMap.insert(pair<string, string>(key, concat));
+	}
+	
 	if (userRoleMap.count(userInput) > 0) {
 		cout << "Welcome " << userInput << "!" << endl; 
 		cout << "cmd>";
@@ -46,8 +62,12 @@ int main()
 	}
 	 
 
-	
+
+
+
+
+
+
 
 	system("pause");
 	return 0;
-}
